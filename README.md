@@ -1,2 +1,3 @@
-# Connor-Frank.github.io
-website
+# My Blog
+
+Blog using Jekyll
