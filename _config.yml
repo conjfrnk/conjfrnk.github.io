@@ -3,9 +3,9 @@ title: Connor Frank's Blog
 email: conjfrnk@gmail.com
 description: "Connor's blog"
 baseurl: ""
-url: "https://Connor-Frank.github.io"
+url: "https://conjfrnk.github.io"
 twitter_username: conjfrnk
-github_username:  Connor-Frank
+github_username:  conjfrnk
 
 # Build settings
 theme: minima
