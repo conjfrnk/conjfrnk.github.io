@@ -4,15 +4,16 @@ title:  "My Website"
 date:   2024-04-12 00:45:00 -0400
 categories: website
 ---
-After many years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how.
+After 10+ years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how.
 
 ## How I got the server/website
 - Vultr OpenBSD VPS
-- Epik to get the domain
+- Epik to get the domain and handle DNS
 
 ## About the website
 - Hosted on OpenBSD using httpd (no 3rd-party tools were installed at all)
 - https using relayd and acme
+- No frameworks, just plain html and style.css
 
 ## Config files
 `/etc/acme-client.conf`
@@ -59,6 +60,9 @@ server "conjfrnk.com" {
 } 
 {% endhighlight %}
 
+### Redirections
+I have configured `/etc/httpd.conf` such that it will redirect `www.conjfrnk.com` to `conjfrnk.com`. I like the simple look better, plus `www` seems way too redundant.
+
 `/etc/relayd.conf`
 {% highlight conf %}
 include "/etc/ips.conf"
@@ -79,9 +83,10 @@ http protocol https {
 	match response header set "X-XSS-Protection" value "1; mode=block"
 	match response header set "X-Content-Type-Options" value "nosniff"
 	match response header set "Strict-Transport-Security" value "max-age=31536000; includeSubDomains; preload"
-# CHANGE THIS GOING FORWARD. JUST WILL REQUIRE WORK
+
+    #CHANGE THIS GOING FORWARD
 	#match response header set "Content-Security-Policy" value "default-src 'none'"
-#
+
 	match response header set "Permissions-Policy" value "accelerometer=()"
 	match response header set "Cache-Control" value "max-age=86400"
 
@@ -101,6 +106,16 @@ relay www6tls {
 	forward to <local> port 8080
 }
 {% endhighlight %}
+
+### Room for Improvement
+The line `match response header set "Content-Security-Policy" value "default-src 'none'"` needs to be updated. Currently, whenever I try to change this, some part of the website breaks.
+
+## Cron
+I am using a cronjob to refresh certificates and reboot httpd as necessary. I also use cron to download and apply system/package updates for OpenBSD:
+
+`30 	3 	* 	* 	* 	acme-client conjfrnk.com && rcctl reload httpd`
+
+`30	4	*	*	0	syspatch && pkg_add -u && reboot`
 
 ## Sources
 I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary. As for the website's content, I would like to credit [Andrej Karpathy][style-inspiration] for having the best-designed personal website I've seen, by a wide margin. I used his `style.css` as a jumping-off point for my own, and I expect my style to develop further in the future.
