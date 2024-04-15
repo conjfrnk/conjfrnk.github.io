@@ -38,7 +38,7 @@ domain conjfrnk.com {
 
 `/etc/httpd.conf`
 {% highlight conf %}
-server "www.conjfrnk.com" {
+server "conjfrnk.com" {
 	listen on 127.0.0.1 port 8080
 	root "/htdocs/www.conjfrnk.com"
 	location "/.well-known/acme-challenge/*" {
@@ -47,16 +47,16 @@ server "www.conjfrnk.com" {
 	}
 }
 
-server "conjfrnk.com" {
+server "www.conjfrnk.com" {
 	listen on 127.0.0.1 port 8080
 	block return 301 "https://conjfrnk.com$REQUEST_URI"
 }
 
-server "www.conjfrnk.com" {
+server "conjfrnk.com" {
 	listen on * port 80
-	alias "conjfrnk.com"
+	alias "www.conjfrnk.com"
 	block return 301 "https://conjfrnk.com$REQUEST_URI"
-}
+} 
 {% endhighlight %}
 
 `/etc/relayd.conf`
@@ -105,7 +105,7 @@ relay www6tls {
 ## Sources
 I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary. As for the website's content, I would like to credit [Andrej Karpathy][style-inspiration] for having the best-designed personal website I've seen, by a wide margin. I used his `style.css` as a jumping-off point for my own, and I expect my style to develop further in the future.
 
-[cf-website]: https://www.conjfrnk.com
+[cf-website]: https://conjfrnk.com
 [official-guide]: https://www.openbsdhandbook.com/services/webserver/ssl
 [unofficial-guide]: https://citizen428.net/blog/self-hosting-static-site-openbsd-httpd-relayd
 [style-inspiration]: https://karpathy.ai
