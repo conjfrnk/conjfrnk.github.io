@@ -63,7 +63,7 @@ server "conjfrnk.com" {
 } 
 {% endhighlight %}
 
-#### Redirections
+### Redirections
 I have configured `/etc/httpd.conf` such that it will redirect `www.conjfrnk.com` to `conjfrnk.com`. I like the simple look better, plus `www` seems way too redundant.
 
 ### `/etc/relayd.conf`
