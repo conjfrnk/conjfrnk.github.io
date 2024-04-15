@@ -83,7 +83,7 @@ http protocol https {
 	match response header set "X-XSS-Protection" value "1; mode=block"
 	match response header set "X-Content-Type-Options" value "nosniff"
 	match response header set "Strict-Transport-Security" value "max-age=31536000; includeSubDomains; preload"
-    match response header set "Content-Security-Policy" value "default-src 'self' avatars.githubusercontent.com projecteuler.net"
+	match response header set "Content-Security-Policy" value "default-src 'self' avatars.githubusercontent.com projecteuler.net"
 	match response header set "Permissions-Policy" value "accelerometer=()"
 	match response header set "Cache-Control" value "max-age=86400"
 
