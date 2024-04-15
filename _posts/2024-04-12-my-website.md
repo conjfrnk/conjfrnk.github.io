@@ -4,7 +4,7 @@ title:  "My Website"
 date:   2024-04-12 00:45:00 -0400
 categories: website
 ---
-# I recently made [my website][cf-website]. Here's how:
+After many years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how:
 
 ## How I got the server/website
 - Vultr OpenBSD VPS
@@ -103,8 +103,9 @@ relay www6tls {
 {% endhighlight %}
 
 ## Sources
-I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary.
+I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary. As for the website's content, I would like to credit [Andrej Karpathy][style-inspiration] for having the best-designed personal website I've seen, by a wide margin. I used his `style.css` as a jumping-off point for my own, and I expect my style to develop further in the future.
 
 [cf-website]: https://www.conjfrnk.com
 [official-guide]: https://www.openbsdhandbook.com/services/webserver/ssl
 [unofficial-guide]: https://citizen428.net/blog/self-hosting-static-site-openbsd-httpd-relayd
+[style-inspiration]: https://karpathy.ai
