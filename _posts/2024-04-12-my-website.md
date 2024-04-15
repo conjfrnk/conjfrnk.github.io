@@ -16,7 +16,7 @@ After 10+ years of wishing I had a home on the internet, I recently made [my web
 - No frameworks, just plain `index.html` and `style.css`
 
 ## Source files
-I have backed up all of the source files for the website itself to [a repository hosted on me and Aaron's website][git-repo]
+I have backed up all of the source files for the website itself to [a self-hosted git repository][git-repo]
 
 ## Config files
 ### `/etc/acme-client.conf`
