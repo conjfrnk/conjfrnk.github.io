@@ -4,7 +4,7 @@ title:  "My Website"
 date:   2024-04-12 00:45:00 -0400
 categories: website
 ---
-After many years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how:
+After many years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how.
 
 ## How I got the server/website
 - Vultr OpenBSD VPS
