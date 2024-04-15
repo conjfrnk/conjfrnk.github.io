@@ -16,7 +16,7 @@ After 10+ years of wishing I had a home on the internet, I recently made [my web
 - No frameworks, just plain `index.html` and `style.css`
 
 ### Why OpenBSD?
-I agree with many of their design choices. Also, it's an [innovative][openbsd-innovations] and [secure][openbsd-security] complete OS. While it may not be [as fast as Linux or another choice][openbsd-performance], I don't need a crazy amount of performance. I'd rather have something stable and secure.
+I agree with many of their design choices. Also, it's an [innovative][openbsd-innovations] and [secure][openbsd-security] complete OS. While it may not be [as fast as Linux or another choice][openbsd-performance], I don't need a crazy amount of performance. I'd rather have something stable and secure. More [here][openbsd-rocks].
 
 ### Why no frameworks?
 Similar reason. I despise bloat--also I have no idea how to use many frameworks. I have tried, and every one of them is a headache. Sometimes dealing with a headache is worth it if that's what you need. If I needed it, I'd probably get someone else to do the coding for me. Not my cup of tea.
@@ -134,3 +134,4 @@ I incorporated parts of the [official OpenBSD guide][official-guide] and [this u
 [openbsd-innovations]: https://www.openbsd.org/innovations.html
 [openbsd-security]: https://www.openbsd.org/security.html
 [openbsd-performance]: https://news.ycombinator.com/item?id=8535150
+[openbsd-rocks]: https://why-openbsd.rocks/fact
