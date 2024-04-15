@@ -4,7 +4,7 @@ title:  "My Website"
 date:   2024-04-12 00:45:00 -0400
 categories: website
 ---
-I recently made [my website][cf-website]. Here's how:
+# I recently made [my website][cf-website]. Here's how:
 
 ## How I got the server/website
 - Vultr OpenBSD VPS
@@ -103,6 +103,8 @@ relay www6tls {
 {% endhighlight %}
 
 ## Sources
-I incorporated parts of the [official OpenBSD guide][https://www.openbsdhandbook.com/services/webserver/ssl/] and [this unofficial guide][https://citizen428.net/blog/self-hosting-static-site-openbsd-httpd-relayd/], making modifications as necessary.
+I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary.
 
 [cf-website]: https://www.conjfrnk.com
+[official-guide]: https://www.openbsdhandbook.com/services/webserver/ssl
+[unofficial-guide]: https://citizen428.net/blog/self-hosting-static-site-openbsd-httpd-relayd
