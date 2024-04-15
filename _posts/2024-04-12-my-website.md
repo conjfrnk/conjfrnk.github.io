@@ -13,7 +13,7 @@ After 10+ years of wishing I had a home on the internet, I recently made [my web
 ## About the website
 - Hosted on OpenBSD using httpd (no 3rd-party tools were installed at all)
 - https using relayd and acme
-- No frameworks, just plain html and style.css
+- No frameworks, just plain `index.html` and `style.css`
 
 ## Config files
 `/etc/acme-client.conf`
@@ -112,9 +112,10 @@ I am using a cronjob to refresh certificates and reboot httpd as necessary. I al
 `30	4	*	*	0	syspatch && pkg_add -u && reboot`
 
 ## Sources
-I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary. As for the website's content, I would like to credit [Andrej Karpathy][style-inspiration] for having the best-designed personal website I've seen, by a wide margin. I used his `style.css` as a jumping-off point for my own, and I expect my style to develop further in the future.
+I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary. As for the website's content, I would like to credit [Andrej Karpathy][style-inspiration] for having the best-designed personal website I've seen, by a wide margin. I used his `style.css` as a jumping-off point for my own, and I expect my style to develop further in the future. I got all of the SVG icons from [this great website][svg-source].
 
 [cf-website]: https://conjfrnk.com
 [official-guide]: https://www.openbsdhandbook.com/services/webserver/ssl
 [unofficial-guide]: https://citizen428.net/blog/self-hosting-static-site-openbsd-httpd-relayd
 [style-inspiration]: https://karpathy.ai
+[svg-source]: https://www.svgrepo.com
