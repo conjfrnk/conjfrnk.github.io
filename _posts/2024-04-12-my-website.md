@@ -19,7 +19,7 @@ After 10+ years of wishing I had a home on the internet, I recently made [my web
 I have backed up all of the source files for the website itself to [a repository hosted on me and Aaron's website][git-repo]
 
 ## Config files
-`/etc/acme-client.conf`
+### `/etc/acme-client.conf`
 {% highlight conf %}
 authority letsencrypt {
         api url "https://acme-v02.api.letsencrypt.org/directory"
@@ -40,7 +40,7 @@ domain conjfrnk.com {
 }
 {% endhighlight %}
 
-`/etc/httpd.conf`
+### `/etc/httpd.conf`
 {% highlight conf %}
 server "conjfrnk.com" {
 	listen on 127.0.0.1 port 8080
@@ -63,10 +63,10 @@ server "conjfrnk.com" {
 } 
 {% endhighlight %}
 
-### Redirections
+#### Redirections
 I have configured `/etc/httpd.conf` such that it will redirect `www.conjfrnk.com` to `conjfrnk.com`. I like the simple look better, plus `www` seems way too redundant.
 
-`/etc/relayd.conf`
+### `/etc/relayd.conf`
 {% highlight conf %}
 include "/etc/ips.conf"
 
