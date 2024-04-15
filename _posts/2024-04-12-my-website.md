@@ -114,6 +114,8 @@ I am using a cronjob to refresh certificates and reboot httpd as necessary. I al
 
 `30	4	*	*	0	syspatch && pkg_add -u && reboot`
 
+Certificate/httpd refreshes happen every night at 3:30am and updates happen every Sunday at 4:30am. Manual urgent updates are performed as necessary.
+
 ## Sources
 I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary. As for the website's content, I would like to credit [Andrej Karpathy][style-inspiration] for having the best-designed personal website I've seen, by a wide margin. I used his `style.css` as a jumping-off point for my own, and I expect my style to develop further in the future. I got all of the SVG icons from [this great website][svg-source].
 
