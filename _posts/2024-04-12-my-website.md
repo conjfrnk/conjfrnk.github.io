@@ -14,6 +14,7 @@ After 10+ years of wishing I had a home on the internet, I recently made [my web
 - Hosted on OpenBSD using httpd (no 3rd-party tools were installed at all)
 - https using relayd and acme
 - No frameworks, just plain `index.html` and `style.css`
+- It's [pretty fast][website-speed]
 
 ### Why OpenBSD?
 I agree with many of their design choices. Also, it's an [innovative][openbsd-innovations] and [secure][openbsd-security] complete OS. While it may not be [as fast as Linux or another choice][openbsd-performance], I don't need a crazy amount of performance. I'd rather have something stable and secure. More [here][openbsd-rocks].
@@ -34,8 +35,8 @@ I have chosen to compress many files using `gzip`, automated by the script `comp
 #!/usr/local/bin/bash
 
 gzip -5fk style.css
-gzip -5fk *.html
-find assets/ -type f -not -name "*.gz" -exec gzip -5fk "{}" \;
+gzip -7fk *.html
+find assets/ -type f -not -name "*.gz" -exec gzip -4fk "{}" \;
 {% endhighlight %}
 
 The `/etc/httpd.conf` and `/etc/relayd.conf` files also reflect `gzip`
@@ -154,3 +155,4 @@ I incorporated parts of the [official OpenBSD guide][official-guide] and [this u
 [openbsd-performance]: https://news.ycombinator.com/item?id=8535150
 [openbsd-rocks]: https://why-openbsd.rocks/fact
 [contrast-guide]: https://dequeuniversity.com/rules/axe/4.8/color-contrast
+[website-speed]: https://pagespeed.web.dev/analysis/https-conjfrnk-com/hpv9aybu79?hl=en&form_factor=desktop
