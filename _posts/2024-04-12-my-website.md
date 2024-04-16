@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "My Website"
-date:   2024-04-12 00:45:00 -0400
+date:   2024-04-15 13:00:00 -0400
 categories: website
 ---
 After 10+ years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how.
@@ -21,8 +21,24 @@ I agree with many of their design choices. Also, it's an [innovative][openbsd-in
 ### Why no frameworks?
 Similar reason. I despise bloat--also I have no idea how to use many frameworks. I have tried, and every one of them is a headache. Sometimes dealing with a headache is worth it if that's what you need. If I needed it, I'd probably get someone else to do the coding for me. Not my cup of tea.
 
+## Accessibility
+I used [this resource][contrast-guide] to inform my color formatting decisions
+
 ## Source files
 I have backed up all of the source files for the website itself to [a self-hosted git repository][git-repo]
+
+### Compression
+I have chosen to compress many files using `gzip`, automated by the script `compress.sh`:
+
+{% highlight sh %}
+#!/usr/local/bin/bash
+
+gzip -5fk style.css
+gzip -5fk *.html
+find assets/ -type f -not -name "*.gz" -exec gzip -5fk "{}" \;
+{% endhighlight %}
+
+The `/etc/httpd.conf` and `/etc/relayd.conf` files also reflect `gzip`
 
 ## Config files
 ### `/etc/acme-client.conf`
@@ -51,6 +67,7 @@ domain conjfrnk.com {
 server "conjfrnk.com" {
 	listen on 127.0.0.1 port 8080
 	root "/htdocs/www.conjfrnk.com"
+    gzip-static
 	location "/.well-known/acme-challenge/*" {
 		root "/acme"
 		request strip 2
@@ -91,10 +108,11 @@ http protocol https {
 	match response header set "X-Frame-Options" value "deny"
 	match response header set "X-XSS-Protection" value "1; mode=block"
 	match response header set "X-Content-Type-Options" value "nosniff"
-	match response header set "Strict-Transport-Security" value "max-age=31536000; includeSubDomains; preload"
-	match response header set "Content-Security-Policy" value "default-src 'self' avatars.githubusercontent.com projecteuler.net"
+	match response header set "Strict-Transport-Security" value "max-age=63072000; includeSubDomains; preload"
+	match response header set "Content-Security-Policy" value "default-src 'self' projecteuler.net"
 	match response header set "Permissions-Policy" value "accelerometer=()"
-	match response header set "Cache-Control" value "max-age=86400"
+	match response header set "Cache-Control" value "max-age=31536000"
+	match response header set "Accept-Encoding" value "gzip, compress"
 
 	return error
 	pass
@@ -135,3 +153,4 @@ I incorporated parts of the [official OpenBSD guide][official-guide] and [this u
 [openbsd-security]: https://www.openbsd.org/security.html
 [openbsd-performance]: https://news.ycombinator.com/item?id=8535150
 [openbsd-rocks]: https://why-openbsd.rocks/fact
+[contrast-guide]: https://dequeuniversity.com/rules/axe/4.8/color-contrast
