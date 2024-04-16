@@ -45,45 +45,45 @@ The `/etc/httpd.conf` and `/etc/relayd.conf` files also reflect `gzip`
 ### `/etc/acme-client.conf`
 {% highlight conf %}
 authority letsencrypt {
-        api url "https://acme-v02.api.letsencrypt.org/directory"
-        account key "/etc/acme/letsencrypt-privkey.pem"
+    api url "https://acme-v02.api.letsencrypt.org/directory"
+    account key "/etc/acme/letsencrypt-privkey.pem"
 }
 
 authority letsencrypt-staging {
-        api url "https://acme-staging.api.letsencrypt.org/directory"
-        account key "/etc/acme/letsencrypt-staging-privkey.pem"
+    api url "https://acme-staging.api.letsencrypt.org/directory"
+    account key "/etc/acme/letsencrypt-staging-privkey.pem"
 }
 
 domain conjfrnk.com {
-       alternative names { www.conjfrnk.com }
-       domain key "/etc/ssl/private/conjfrnk.com.key"
-       domain certificate "/etc/ssl/conjfrnk.com.crt"
-       domain full chain certificate "/etc/ssl/conjfrnk.com.fullchain.pem"
-       sign with letsencrypt
+    alternative names { www.conjfrnk.com }
+    domain key "/etc/ssl/private/conjfrnk.com.key"
+    domain certificate "/etc/ssl/conjfrnk.com.crt"
+    domain full chain certificate "/etc/ssl/conjfrnk.com.fullchain.pem"
+    sign with letsencrypt
 }
 {% endhighlight %}
 
 ### `/etc/httpd.conf`
 {% highlight conf %}
 server "conjfrnk.com" {
-	listen on 127.0.0.1 port 8080
-	root "/htdocs/www.conjfrnk.com"
+    listen on 127.0.0.1 port 8080
+    root "/htdocs/www.conjfrnk.com"
     gzip-static
-	location "/.well-known/acme-challenge/*" {
-		root "/acme"
-		request strip 2
-	}
+    location "/.well-known/acme-challenge/*" {
+        root "/acme"
+        request strip 2
+    }
 }
 
 server "www.conjfrnk.com" {
-	listen on 127.0.0.1 port 8080
-	block return 301 "https://conjfrnk.com$REQUEST_URI"
+    listen on 127.0.0.1 port 8080
+    block return 301 "https://conjfrnk.com$REQUEST_URI"
 }
 
 server "conjfrnk.com" {
-	listen on * port 80
-	alias "www.conjfrnk.com"
-	block return 301 "https://conjfrnk.com$REQUEST_URI"
+    listen on * port 80
+    alias "www.conjfrnk.com"
+    block return 301 "https://conjfrnk.com$REQUEST_URI"
 } 
 {% endhighlight %}
 
@@ -97,47 +97,47 @@ include "/etc/ips.conf"
 table <local> { 127.0.0.1 }
 
 http protocol https {
-	tls ciphers "HIGH:!aNULL:!SSLv3:!DSS:!ECDSA:!RSA:-ECDH:ECDHE:+SHA384:+SHA256"
-	tls cipher-server-preference
-	tls no client-renegotiation
-	tls keypair "conjfrnk.com"
+    tls ciphers "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:!aNULL:!SSLv3:!DSS:!ECDSA:!RSA"
+    tls cipher-server-preference
+    tls no client-renegotiation
+    tls keypair "conjfrnk.com"
 
-	match request header append "X-Forwarded-For" value "$REMOTE_ADDR"
-	match request header append "X-Forwarded-Port" value "$REMOTE_PORT"
+    match request header append "X-Forwarded-For" value "$REMOTE_ADDR"
+    match request header append "X-Forwarded-Port" value "$REMOTE_PORT"
 
-	match response header set "Referrer-Policy" value "same-origin"
-	match response header set "X-Frame-Options" value "deny"
-	match response header set "X-XSS-Protection" value "1; mode=block"
-	match response header set "X-Content-Type-Options" value "nosniff"
-	match response header set "Strict-Transport-Security" value "max-age=63072000; includeSubDomains; preload"
-	match response header set "Content-Security-Policy" value "default-src 'self' projecteuler.net"
-	match response header set "Permissions-Policy" value "accelerometer=()"
-	match response header set "Cache-Control" value "max-age=31536000"
-	match response header set "Accept-Encoding" value "gzip, compress"
+    match response header set "Referrer-Policy" value "strict-origin-when-cross-origin"
+    match response header set "X-Frame-Options" value "deny"
+    match response header set "X-XSS-Protection" value "1; mode=block"
+    match response header set "X-Content-Type-Options" value "nosniff"
+    match response header set "Strict-Transport-Security" value "max-age=63072000; includeSubDomains; preload"
+    match response header set "Content-Security-Policy" value "default-src 'self'; script-src 'none'; object-src 'none'; img-src 'self' projecteuler.net"
+    match response header set "Permissions-Policy" value "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=()"
+    match response header set "Cache-Control" value "no-store"
+    match response header set "Accept-Encoding" value "gzip, deflate, br"
 
-	return error
-	pass
+    return error
+    pass
 }
 
 relay wwwtls {
-	listen on $ipv4 port 443 tls
-	protocol https
-	forward to <local> port 8080
+    listen on $ipv4 port 443 tls
+    protocol https
+    forward to <local> port 8080
 }
 
 relay www6tls {
-	listen on $ipv6 port 443 tls
-	protocol https
-	forward to <local> port 8080
+    listen on $ipv6 port 443 tls
+    protocol https
+    forward to <local> port 8080
 }
 {% endhighlight %}
 
 ## Cron
 I am using a cronjob to refresh certificates and reboot httpd as necessary. I also use cron to download and apply system/package updates for OpenBSD:
 
-`30 	3 	* 	* 	* 	acme-client conjfrnk.com && rcctl reload httpd`
+`30 3 	* 	* 	* 	acme-client conjfrnk.com && rcctl reload httpd relayd`
 
-`30	4	*	*	0	syspatch && pkg_add -u && reboot`
+`30 4	*	*	0	pkg_add -u && syspatch && reboot`
 
 Certificate/httpd refreshes happen every night at 3:30am and updates happen every Sunday at 4:30am. Manual urgent updates are performed as necessary.
 
@@ -155,4 +155,4 @@ I incorporated parts of the [official OpenBSD guide][official-guide] and [this u
 [openbsd-performance]: https://news.ycombinator.com/item?id=8535150
 [openbsd-rocks]: https://why-openbsd.rocks/fact
 [contrast-guide]: https://dequeuniversity.com/rules/axe/4.8/color-contrast
-[website-speed]: https://pagespeed.web.dev/analysis/https-conjfrnk-com/hpv9aybu79?hl=en&form_factor=desktop
+[website-speed]: https://pagespeed.web.dev/analysis/https-conjfrnk-com/q1jkxm2u1d?hl=en&form_factor=mobile
