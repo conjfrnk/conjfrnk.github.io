@@ -2,7 +2,6 @@
 layout: post
 title:  "My Website"
 date:   2024-04-15 13:00:00 -0400
-categories: website
 ---
 After 10+ years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how.
 
