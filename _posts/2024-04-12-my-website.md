@@ -44,46 +44,45 @@ The `/etc/httpd.conf` and `/etc/relayd.conf` files also reflect `gzip`
 ### `/etc/acme-client.conf`
 {% highlight conf %}
 authority letsencrypt {
-    api url "https://acme-v02.api.letsencrypt.org/directory"
-    account key "/etc/acme/letsencrypt-privkey.pem"
+        api url "https://acme-v02.api.letsencrypt.org/directory"
+        account key "/etc/acme/letsencrypt-privkey.pem"
 }
 
 authority letsencrypt-staging {
-    api url "https://acme-staging.api.letsencrypt.org/directory"
-    account key "/etc/acme/letsencrypt-staging-privkey.pem"
+        api url "https://acme-staging.api.letsencrypt.org/directory"
+        account key "/etc/acme/letsencrypt-staging-privkey.pem"
 }
 
 domain conjfrnk.com {
-    alternative names { www.conjfrnk.com }
-    domain key "/etc/ssl/private/conjfrnk.com.key"
-    domain certificate "/etc/ssl/conjfrnk.com.crt"
-    domain full chain certificate "/etc/ssl/conjfrnk.com.fullchain.pem"
-    sign with letsencrypt
+       alternative names { www.conjfrnk.com }
+       domain key "/etc/ssl/private/conjfrnk.com.key"
+       domain full chain certificate "/etc/ssl/conjfrnk.com.crt"
+       sign with letsencrypt
 }
 {% endhighlight %}
 
 ### `/etc/httpd.conf`
 {% highlight conf %}
 server "conjfrnk.com" {
-    listen on 127.0.0.1 port 8080
-    root "/htdocs/www.conjfrnk.com"
-    gzip-static
-    location "/.well-known/acme-challenge/*" {
-        root "/acme"
-        request strip 2
-    }
+	listen on 127.0.0.1 port 8080
+	root "/htdocs/www.conjfrnk.com"
+	gzip-static
+	location "/.well-known/acme-challenge/*" {
+		root "/acme"
+		request strip 2
+	}
 }
 
 server "www.conjfrnk.com" {
-    listen on 127.0.0.1 port 8080
-    block return 301 "https://conjfrnk.com$REQUEST_URI"
+	listen on 127.0.0.1 port 8080
+	block return 301 "https://conjfrnk.com$REQUEST_URI"
 }
 
 server "conjfrnk.com" {
-    listen on * port 80
-    alias "www.conjfrnk.com"
-    block return 301 "https://conjfrnk.com$REQUEST_URI"
-} 
+	listen on * port 80
+	alias "www.conjfrnk.com"
+	block return 301 "https://conjfrnk.com$REQUEST_URI"
+}
 {% endhighlight %}
 
 ### Redirections
@@ -99,6 +98,7 @@ http protocol https {
     tls ciphers "TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:!aNULL:!SSLv3:!DSS:!ECDSA:!RSA"
     tls cipher-server-preference
     tls no client-renegotiation
+    tls no session tickets
     tls keypair "conjfrnk.com"
 
     match request header append "X-Forwarded-For" value "$REMOTE_ADDR"
@@ -109,9 +109,9 @@ http protocol https {
     match response header set "X-XSS-Protection" value "1; mode=block"
     match response header set "X-Content-Type-Options" value "nosniff"
     match response header set "Strict-Transport-Security" value "max-age=63072000; includeSubDomains; preload"
-    match response header set "Content-Security-Policy" value "default-src 'self'; script-src 'none'; object-src 'none'; img-src 'self' projecteuler.net"
+    match response header set "Content-Security-Policy" value "default-src 'none'; script-src 'self' 'nonce-analytics'; object-src 'none'; style-src 'self'; img-src 'self' projecteuler.net; frame-ancestors 'none'; base-uri 'none'; form-action 'none'; connect-src 'self' www.googletagmanager.com www.google-analytics.com"
     match response header set "Permissions-Policy" value "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=()"
-    match response header set "Cache-Control" value "no-store"
+    match response header set "Cache-Control" value "max-age=31536000, immutable"
     match response header set "Accept-Encoding" value "gzip, deflate, br"
 
     return error
