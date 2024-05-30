@@ -143,6 +143,8 @@ Certificate/httpd refreshes happen every night at 3:30am and updates happen ever
 ## Sources
 I incorporated parts of the [official OpenBSD guide][official-guide] and [this unofficial guide][unofficial-guide], making modifications as necessary. As for the website's content, I would like to credit [Andrej Karpathy][style-inspiration] for having the best-designed personal website I've seen, by a wide margin. I used his `style.css` as a jumping-off point for my own, and I expect my style to develop further in the future. I got all of the SVG icons from [this great website][svg-source].
 
+I also used this [SRI Hash Generator][sri-hash] to secure my Google Tag Manager scripts (Google Analytics used to count visitors)
+
 [cf-website]: https://conjfrnk.com
 [official-guide]: https://www.openbsdhandbook.com/services/webserver/ssl
 [unofficial-guide]: https://citizen428.net/blog/self-hosting-static-site-openbsd-httpd-relayd
@@ -155,3 +157,4 @@ I incorporated parts of the [official OpenBSD guide][official-guide] and [this u
 [openbsd-rocks]: https://why-openbsd.rocks/fact
 [contrast-guide]: https://dequeuniversity.com/rules/axe/4.8/color-contrast
 [website-speed]: https://pagespeed.web.dev/analysis/https-conjfrnk-com/q1jkxm2u1d?hl=en&form_factor=mobile
+[sri-hash]: https://www.srihash.org/
