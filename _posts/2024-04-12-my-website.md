@@ -71,6 +71,9 @@ server "conjfrnk.com" {
 		root "/acme"
 		request strip 2
 	}
+    location match "/([^.]+)$" {
+        request rewrite "/%1.html"
+    }
 }
 
 server "www.conjfrnk.com" {
