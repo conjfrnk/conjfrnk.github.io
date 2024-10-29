@@ -1,24 +1,3 @@
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
-    <link rel="shortcut icon" type="image/png" href="favicon.png">
-    {%- feed_meta -%}
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MDM8QE5LR8"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-MDM8QE5LR8');
-    </script>
-    <meta name="google-site-verification" content="183vpiqA3sAnglYKYQ6a5QXfXPF5423U3h0NVArIy2A" />
-
-    {% seo %}
-</head>
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0JJS2JBDRV"></script>
 <script>
@@ -27,3 +6,13 @@
     gtag('js', new Date());
     gtag('config', 'G-0JJS2JBDRV');
 </script>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    {%- feed_meta -%}
+    {% seo %}
+</head>
