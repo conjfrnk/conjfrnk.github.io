@@ -159,5 +159,5 @@ I also used this [SRI Hash Generator][sri-hash] to secure my Google Tag Manager 
 [openbsd-performance]: https://news.ycombinator.com/item?id=8535150
 [openbsd-rocks]: https://why-openbsd.rocks/fact
 [contrast-guide]: https://dequeuniversity.com/rules/axe/4.8/color-contrast
-[website-speed]: https://pagespeed.web.dev/analysis/https-conjfrnk-com/q1jkxm2u1d?hl=en&form_factor=mobile
+[website-speed]: https://pagespeed.web.dev/analysis/https-conjfrnk-com/s9uq866384?form_factor=desktop
 [sri-hash]: https://www.srihash.org/
