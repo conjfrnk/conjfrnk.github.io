@@ -25,7 +25,7 @@ Similar reason. I despise bloat--also I have no idea how to use many frameworks.
 I used [this resource][contrast-guide] to inform my color formatting decisions
 
 ## Source files
-I have backed up all of the source files for the website itself to [a self-hosted git repository][git-repo]
+I have backed up all of the source files for the website itself to [this repository][git-repo]
 
 ### Compression
 I have chosen to compress many files using `gzip`, automated by the script `compress.sh`:
@@ -153,7 +153,7 @@ I also used this [SRI Hash Generator][sri-hash] to secure my Google Tag Manager 
 [unofficial-guide]: https://citizen428.net/blog/self-hosting-static-site-openbsd-httpd-relayd
 [style-inspiration]: https://karpathy.ai
 [svg-source]: https://www.svgrepo.com
-[git-repo]: https://git.loftyields.com/connor-website/tree
+[git-repo]: https://github.com/conjfrnk/conjfrnk.com
 [openbsd-innovations]: https://www.openbsd.org/innovations.html
 [openbsd-security]: https://www.openbsd.org/security.html
 [openbsd-performance]: https://news.ycombinator.com/item?id=8535150
