@@ -14,6 +14,12 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# Only these pages appear in the header nav.
+# Other top-level pages (e.g. monaco/privacy, monaco/terms) still build and
+# are reachable via their permalinks, they just don't show up in the menu.
+header_pages:
+  - about.markdown
+
 markdown: kramdown
 permalink: pretty
 
