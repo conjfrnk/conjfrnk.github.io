@@ -1,0 +1,31 @@
+{%- comment -%}
+  Extra <head> content beyond what jekyll-seo-tag emits.
+
+  Top-level standalone Person JSON-LD so Google's Knowledge Graph
+  has a clean identity node for Connor Frank. jekyll-seo-tag only
+  emits a nested author.Person inside BlogPosting/WebSite schema,
+  which is lower-signal than a top-level @type=Person entity.
+
+  Intentionally contains no jobTitle, worksFor, or alumniOf fields —
+  these would assert employment/enrollment that we don't want to
+  publish in machine-readable form.
+
+  sameAs contains only identifiers that are unambiguously Connor
+  personally (his site, GitHub, Twitter). Detent.ai is deliberately
+  excluded because including a company URL in a Person's sameAs
+  semantically asserts identity overlap with that company.
+{%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Connor Frank",
+  "url": "https://conjfrnk.com",
+  "image": "https://conjfrnk.github.io/assets/ConnorFrank.jpg",
+  "sameAs": [
+    "https://conjfrnk.com",
+    "https://github.com/conjfrnk",
+    "https://twitter.com/conjfrnk"
+  ]
+}
+</script>
