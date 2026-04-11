@@ -2,6 +2,9 @@
 layout: post
 title:  "My Website"
 date:   2024-04-15 13:00:00 -0400
+description: >-
+  How I built conjfrnk.com as a no-framework static site on an
+  OpenBSD VPS — httpd, relayd, acme-client, and gzip compression.
 ---
 After 10+ years of wishing I had a home on the internet, I recently made [my website][cf-website]. Here's how.
 

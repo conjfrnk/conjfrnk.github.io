@@ -2,6 +2,9 @@
 layout: post
 title:  "Adding CharterMeals to My OpenBSD Server"
 date:   2025-01-29 19:30:00 -0400
+description: >-
+  Adding a second domain to an OpenBSD VPS — a new acme-client
+  block, httpd server stanzas, and a second TLS keypair in relayd.
 ---
 I recently decided to host an additional website, [chartermeals.com][cm-website], on the same OpenBSD VPS where I run [conjfrnk.com][cf-website]. Here's how.
 
