@@ -1,13 +1,84 @@
-author: Connor Frank
+# ---------------------------------------------------------------------------
+# Identity
+# ---------------------------------------------------------------------------
+# `author` is a hash so jekyll-seo-tag can pull site.author.twitter for the
+# twitter:creator meta tag. If this were a plain string, jekyll-seo-tag
+# would fall back to using site.author as the twitter handle, producing
+# twitter:creator="@Connor Frank" (with the space) which is wrong.
+# _includes/footer.html is updated to render site.author.name instead of
+# site.author directly, so the hash form doesn't leak into the footer.
+author:
+  name: Connor Frank
+  email: conjfrnk+blog@gmail.com
+  url: https://conjfrnk.com
+  twitter: conjfrnk
+
 title: Connor Frank's Blog
 email: conjfrnk+blog@gmail.com
-description: "A place where I occasionally post things"
+
+# `description` is the SEO field — jekyll-seo-tag uses it for
+# <meta description>, og:description, twitter:description, and the
+# JSON-LD "description" field on both the WebSite and each BlogPosting.
+# This is what Google and social platforms see.
+description: >-
+  Writing by Connor Frank on AI verification, proof-carrying answers,
+  NLI evaluation, and systems engineering — occasional personal
+  notes and research writeups.
+
+# `footer_tagline` is the visible footer field. It is deliberately NOT
+# named `tagline` because jekyll-seo-tag specifically reads `site.tagline`
+# as the home page's title-tag subtitle — using that key would put the
+# cheeky string into <title>, which is the single most SEO-important
+# position. footer.html reads this with a `site.description` fallback.
+footer_tagline: A place where I occasionally post things
+
 baseurl: ""
 url: "https://conjfrnk.github.io"
-twitter_username: conjfrnk
-github_username:  conjfrnk
 
+# ---------------------------------------------------------------------------
+# Social / identity graph
+# ---------------------------------------------------------------------------
+
+# Keep these two root-level keys for minima's footer social-icon include —
+# it reads site.github_username and site.twitter_username directly and will
+# drop the icons if they're missing.
+github_username: conjfrnk
+twitter_username: conjfrnk
+
+# Nested twitter block — read by jekyll-seo-tag (which expects this shape)
+# to emit twitter:creator and twitter:site. summary_large_image gives the
+# big-photo card layout on Twitter/X, matching the 1200x630 og:image spec.
+twitter:
+  username: conjfrnk
+  card: summary_large_image
+
+# `social` is read by jekyll-seo-tag to emit Person.sameAs in the author
+# schema inside BlogPosting. Links are only identifiers that are
+# unambiguously Connor personally — no company URLs (see head_extra.html
+# for the reasoning).
+social:
+  name: Connor Frank
+  links:
+    - https://conjfrnk.com
+    - https://github.com/conjfrnk
+    - https://twitter.com/conjfrnk
+
+# ---------------------------------------------------------------------------
+# Default front-matter cascade
+# ---------------------------------------------------------------------------
+# Every page and post inherits `image: /assets/og-default.png` unless it
+# sets its own `image:` in front matter. jekyll-seo-tag picks this up
+# automatically and emits og:image + twitter:image tags with the absolute
+# URL resolved from site.url.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/og-default.png
+
+# ---------------------------------------------------------------------------
 # Build settings
+# ---------------------------------------------------------------------------
 theme: minima
 plugins:
   - jekyll-feed
@@ -32,6 +103,7 @@ exclude:
   - node_modules/
   - vendor/
   - docs/
+  - scripts/
 
 markdown: kramdown
 permalink: pretty
@@ -41,6 +113,3 @@ kramdown:
   input: GFM
   auto_ids: true
   syntax_highlighter: rouge
-
-# (The Jekyll-generated exclude template block that used to live here has been
-# removed; see the active `exclude:` block near the top of this file.)
