@@ -20,6 +20,19 @@ plugins:
 header_pages:
   - about.markdown
 
+# Skip Jekyll's usual non-source directories plus local-only workflow dirs.
+# (Listed explicitly because setting `exclude:` at all seems to replace rather
+# than extend Jekyll's internal default list in this setup.)
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/
+  - docs/
+
 markdown: kramdown
 permalink: pretty
 
@@ -29,22 +42,5 @@ kramdown:
   auto_ids: true
   syntax_highlighter: rouge
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# (The Jekyll-generated exclude template block that used to live here has been
+# removed; see the active `exclude:` block near the top of this file.)
